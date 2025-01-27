@@ -6,9 +6,11 @@ import { useToast } from '@/components/ui/use-toast';
 
 const GpaCalculator: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [showGPA, setShowGPA] = useState(false);
   const { toast } = useToast();
 
   const addCourse = () => {
+    setShowGPA(false); // Hide GPA when adding new course
     const newCourse: Course = {
       id: Math.random().toString(36).substr(2, 9),
       grade: 0,
@@ -19,10 +21,12 @@ const GpaCalculator: React.FC = () => {
   };
 
   const removeCourse = (id: string) => {
+    setShowGPA(false); // Hide GPA when removing course
     setCourses(courses.filter(course => course.id !== id));
   };
 
   const updateGrade = (id: string, grade: Grade) => {
+    setShowGPA(false); // Hide GPA when updating grade
     if (grade < 0 || grade > 100) {
       toast({
         title: "Invalid Score",
@@ -37,6 +41,7 @@ const GpaCalculator: React.FC = () => {
   };
 
   const updateCredits = (id: string, credits: number) => {
+    setShowGPA(false); // Hide GPA when updating credits
     if (credits < 1 || credits > 6) {
       toast({
         title: "Invalid Units",
@@ -51,6 +56,7 @@ const GpaCalculator: React.FC = () => {
   };
 
   const updateCourseCode = (id: string, courseCode: string) => {
+    setShowGPA(false); // Hide GPA when updating course code
     setCourses(courses.map(course => 
       course.id === id ? { ...course, courseCode } : course
     ));
@@ -58,9 +64,43 @@ const GpaCalculator: React.FC = () => {
 
   const clearAll = () => {
     setCourses([]);
+    setShowGPA(false);
     toast({
       title: "Cleared",
       description: "All courses have been removed",
+    });
+  };
+
+  const handleCalculateGPA = () => {
+    if (courses.length === 0) {
+      toast({
+        title: "No Courses",
+        description: "Please add at least one course to calculate GPA",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Check if all required fields are filled
+    const hasEmptyCourses = courses.some(course => 
+      course.courseCode.trim() === '' || 
+      course.grade === 0 || 
+      course.credits === 0
+    );
+
+    if (hasEmptyCourses) {
+      toast({
+        title: "Incomplete Information",
+        description: "Please fill in all course details before calculating GPA",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setShowGPA(true);
+    toast({
+      title: "GPA Calculated",
+      description: "Your GPA has been calculated based on your course inputs",
     });
   };
 
@@ -102,16 +142,24 @@ const GpaCalculator: React.FC = () => {
             Add Course
           </button>
           {courses.length > 0 && (
-            <button
-              onClick={clearAll}
-              className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-            >
-              Clear All
-            </button>
+            <>
+              <button
+                onClick={handleCalculateGPA}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Calculate GPA
+              </button>
+              <button
+                onClick={clearAll}
+                className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+              >
+                Clear All
+              </button>
+            </>
           )}
         </div>
 
-        {courses.length > 0 && (
+        {showGPA && courses.length > 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
