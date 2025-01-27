@@ -11,8 +11,9 @@ const GpaCalculator: React.FC = () => {
   const addCourse = () => {
     const newCourse: Course = {
       id: Math.random().toString(36).substr(2, 9),
-      grade: 'A',
+      grade: 0,
       credits: 3,
+      courseCode: '',
     };
     setCourses([...courses, newCourse]);
   };
@@ -22,6 +23,14 @@ const GpaCalculator: React.FC = () => {
   };
 
   const updateGrade = (id: string, grade: Grade) => {
+    if (grade < 0 || grade > 100) {
+      toast({
+        title: "Invalid Score",
+        description: "Score must be between 0 and 100",
+        variant: "destructive",
+      });
+      return;
+    }
     setCourses(courses.map(course => 
       course.id === id ? { ...course, grade } : course
     ));
@@ -30,14 +39,20 @@ const GpaCalculator: React.FC = () => {
   const updateCredits = (id: string, credits: number) => {
     if (credits < 1 || credits > 6) {
       toast({
-        title: "Invalid Credits",
-        description: "Credits must be between 1 and 6",
+        title: "Invalid Units",
+        description: "Units must be between 1 and 6",
         variant: "destructive",
       });
       return;
     }
     setCourses(courses.map(course => 
       course.id === id ? { ...course, credits } : course
+    ));
+  };
+
+  const updateCourseCode = (id: string, courseCode: string) => {
+    setCourses(courses.map(course => 
+      course.id === id ? { ...course, courseCode } : course
     ));
   };
 
@@ -73,6 +88,7 @@ const GpaCalculator: React.FC = () => {
               {...course}
               onGradeChange={updateGrade}
               onCreditsChange={updateCredits}
+              onCourseCodeChange={updateCourseCode}
               onRemove={removeCourse}
             />
           ))}

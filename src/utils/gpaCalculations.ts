@@ -1,24 +1,25 @@
-export type Grade = 'A' | 'B' | 'C' | 'D' | 'F';
+export type Grade = number; // Now represents score out of 100
 
 export interface Course {
   id: string;
   grade: Grade;
   credits: number;
+  courseCode: string;
 }
 
-export const gradePoints: Record<Grade, number> = {
-  'A': 4.0,
-  'B': 3.0,
-  'C': 2.0,
-  'D': 1.0,
-  'F': 0.0,
+const getGradePoints = (score: number): number => {
+  if (score >= 90) return 4.0;
+  if (score >= 80) return 3.0;
+  if (score >= 70) return 2.0;
+  if (score >= 60) return 1.0;
+  return 0.0;
 };
 
 export const calculateGPA = (courses: Course[]): number => {
   if (courses.length === 0) return 0;
 
   const totalPoints = courses.reduce((sum, course) => {
-    return sum + (gradePoints[course.grade] * course.credits);
+    return sum + (getGradePoints(course.grade) * course.credits);
   }, 0);
 
   const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
