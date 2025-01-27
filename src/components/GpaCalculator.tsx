@@ -108,17 +108,17 @@ const GpaCalculator: React.FC = () => {
   const classification = getClassification(gpa);
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="w-full max-w-2xl mx-auto p-4 sm:p-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-xl shadow-lg p-8"
+        className="bg-white rounded-xl shadow-lg p-4 sm:p-8"
       >
         <div className="text-center mb-8">
           <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
             Calculator
           </span>
-          <h1 className="text-4xl font-bold mt-4 mb-2">GPA Calculator</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mt-4 mb-2">GPA Calculator</h1>
           <p className="text-gray-600">Add your courses to calculate your GPA</p>
         </div>
 
@@ -135,10 +135,10 @@ const GpaCalculator: React.FC = () => {
           ))}
         </AnimatePresence>
 
-        <div className="flex gap-4 justify-center mt-6">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
           <button
             onClick={addCourse}
-            className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+            className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors w-full sm:w-auto"
           >
             Add Course
           </button>
@@ -146,13 +146,13 @@ const GpaCalculator: React.FC = () => {
             <>
               <button
                 onClick={handleCalculateGPA}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
               >
                 Calculate GPA
               </button>
               <button
                 onClick={clearAll}
-                className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors w-full sm:w-auto"
               >
                 Clear All
               </button>
@@ -166,9 +166,9 @@ const GpaCalculator: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="mt-8 text-center"
           >
-            <div className="text-6xl font-bold">{gpa}</div>
+            <div className="text-5xl sm:text-6xl font-bold">{gpa}</div>
             <div className="text-gray-500 mt-2">Cumulative GPA</div>
-            <div className="text-xl font-semibold mt-4 text-blue-600">{classification}</div>
+            <div className="text-lg sm:text-xl font-semibold mt-4 text-blue-600">{classification}</div>
           </motion.div>
         )}
       </motion.div>

@@ -30,9 +30,9 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="flex gap-4 items-end mb-4 p-4 bg-white rounded-lg shadow-sm"
+      className="flex flex-col sm:flex-row gap-4 items-start sm:items-end mb-4 p-4 bg-white rounded-lg shadow-sm"
     >
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-full sm:w-auto">
         <Label htmlFor={`courseCode-${id}`}>Course Code</Label>
         <Input
           id={`courseCode-${id}`}
@@ -40,11 +40,11 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           value={courseCode}
           onChange={(e) => onCourseCodeChange(id, e.target.value)}
           placeholder="e.g., CSC101"
-          className="w-32"
+          className="w-full sm:w-32"
         />
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-full sm:w-auto">
         <Label htmlFor={`grade-${id}`}>Score (0-100)</Label>
         <Input
           id={`grade-${id}`}
@@ -54,11 +54,11 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           value={grade}
           onChange={(e) => onGradeChange(id, Number(e.target.value))}
           placeholder="Score"
-          className="w-32"
+          className="w-full sm:w-32"
         />
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-full sm:w-auto">
         <Label htmlFor={`credits-${id}`}>Course Units</Label>
         <Input
           id={`credits-${id}`}
@@ -68,13 +68,13 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           value={credits}
           onChange={(e) => onCreditsChange(id, Number(e.target.value))}
           placeholder="Units"
-          className="w-24"
+          className="w-full sm:w-24"
         />
       </div>
 
       <button
         onClick={() => onRemove(id)}
-        className="p-2 text-red-500 hover:text-red-700 transition-colors"
+        className="p-2 text-red-500 hover:text-red-700 transition-colors w-full sm:w-auto mt-4 sm:mt-0"
       >
         Remove
       </button>
