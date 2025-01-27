@@ -1,4 +1,4 @@
-export type Grade = number; // Now represents score out of 100
+export type Grade = number; // Represents score out of 100
 
 export interface Course {
   id: string;
@@ -8,11 +8,19 @@ export interface Course {
 }
 
 const getGradePoints = (score: number): number => {
-  if (score >= 90) return 4.0;
-  if (score >= 80) return 3.0;
-  if (score >= 70) return 2.0;
-  if (score >= 60) return 1.0;
-  return 0.0;
+  if (score >= 70) return 5.0; // A
+  if (score >= 60) return 4.0; // B
+  if (score >= 50) return 3.0; // C
+  if (score >= 45) return 2.0; // D
+  return 0.0; // F
+};
+
+export const getClassification = (gpa: number): string => {
+  if (gpa >= 4.50) return "First Class Honours (1st)";
+  if (gpa >= 3.50) return "Second Class Upper (2:1)";
+  if (gpa >= 2.50) return "Second Class Lower (2:2)";
+  if (gpa >= 1.50) return "Third Class (3rd)";
+  return "Fail";
 };
 
 export const calculateGPA = (courses: Course[]): number => {

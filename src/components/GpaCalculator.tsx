@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CourseEntry from './CourseEntry';
-import { Course, Grade, calculateGPA } from '@/utils/gpaCalculations';
+import { Course, Grade, calculateGPA, getClassification } from '@/utils/gpaCalculations';
 import { useToast } from '@/components/ui/use-toast';
 
 const GpaCalculator: React.FC = () => {
@@ -105,6 +105,7 @@ const GpaCalculator: React.FC = () => {
   };
 
   const gpa = calculateGPA(courses);
+  const classification = getClassification(gpa);
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -167,6 +168,7 @@ const GpaCalculator: React.FC = () => {
           >
             <div className="text-6xl font-bold">{gpa}</div>
             <div className="text-gray-500 mt-2">Cumulative GPA</div>
+            <div className="text-xl font-semibold mt-4 text-blue-600">{classification}</div>
           </motion.div>
         )}
       </motion.div>
