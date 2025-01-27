@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grade, gradePoints } from '@/utils/gpaCalculations';
+import { Grade, gradePoints } from '../utils/gpaCalculations';
 import { motion } from 'framer-motion';
 
 interface CourseEntryProps {
