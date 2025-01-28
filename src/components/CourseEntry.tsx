@@ -1,8 +1,8 @@
-import React from 'react';
-import { Grade } from '../utils/gpaCalculations';
-import { motion } from 'framer-motion';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+import React from "react";
+import { Grade } from "../utils/gpaCalculations";
+import { motion } from "framer-motion";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import {
   Select,
   SelectContent,
@@ -58,7 +58,7 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           type="number"
           min="0"
           max="100"
-          value={grade || ''}
+          value={grade || ""}
           onChange={(e) => onGradeChange(id, Number(e.target.value))}
           placeholder="Score"
           className="w-full sm:w-32"
@@ -87,9 +87,9 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
 
       <button
         onClick={() => onRemove(id)}
-        className="p-2 text-red-500 hover:text-red-700 transition-colors w-full sm:w-auto mt-4 sm:mt-0"
+        className="p-2 text-red-500 hover:text-red-700 transition-colors sm:w-auto mt-4 sm:mt-0"
       >
-        Remove
+        <img className="w-[35px]" src="delete.svg" alt="" />
       </button>
     </motion.div>
   );

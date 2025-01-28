@@ -1,8 +1,13 @@
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import CourseEntry from './CourseEntry';
-import { Course, Grade, calculateGPA, getClassification } from '@/utils/gpaCalculations';
-import { useToast } from '@/components/ui/use-toast';
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import CourseEntry from "./CourseEntry";
+import {
+  Course,
+  Grade,
+  calculateGPA,
+  getClassification,
+} from "@/utils/gpaCalculations";
+import { useToast } from "@/components/ui/use-toast";
 
 const GpaCalculator: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -16,14 +21,14 @@ const GpaCalculator: React.FC = () => {
       id: Math.random().toString(36).substr(2, 9),
       grade: 0,
       credits: 3,
-      courseCode: '',
+      courseCode: "",
     };
     setCourses([...courses, newCourse]);
   };
 
   const removeCourse = (id: string) => {
     setShowGPA(false);
-    setCourses(courses.filter(course => course.id !== id));
+    setCourses(courses.filter((course) => course.id !== id));
   };
 
   const updateGrade = (id: string, grade: Grade) => {
@@ -36,9 +41,11 @@ const GpaCalculator: React.FC = () => {
       });
       return;
     }
-    setCourses(courses.map(course => 
-      course.id === id ? { ...course, grade } : course
-    ));
+    setCourses(
+      courses.map((course) =>
+        course.id === id ? { ...course, grade } : course
+      )
+    );
   };
 
   const updateCredits = (id: string, credits: number) => {
@@ -51,16 +58,20 @@ const GpaCalculator: React.FC = () => {
       });
       return;
     }
-    setCourses(courses.map(course => 
-      course.id === id ? { ...course, credits } : course
-    ));
+    setCourses(
+      courses.map((course) =>
+        course.id === id ? { ...course, credits } : course
+      )
+    );
   };
 
   const updateCourseCode = (id: string, courseCode: string) => {
     setShowGPA(false);
-    setCourses(courses.map(course => 
-      course.id === id ? { ...course, courseCode } : course
-    ));
+    setCourses(
+      courses.map((course) =>
+        course.id === id ? { ...course, courseCode } : course
+      )
+    );
   };
 
   const clearAll = () => {
@@ -81,11 +92,12 @@ const GpaCalculator: React.FC = () => {
       });
       return;
     }
-    
-    const hasEmptyCourses = courses.some(course => 
-      course.courseCode.trim() === '' || 
-      course.grade === 0 || 
-      course.credits === 0
+
+    const hasEmptyCourses = courses.some(
+      (course) =>
+        course.courseCode.trim() === "" ||
+        course.grade === 0 ||
+        course.credits === 0
     );
 
     if (hasEmptyCourses) {
@@ -105,7 +117,10 @@ const GpaCalculator: React.FC = () => {
 
     // Scroll to result after a short delay to ensure the element is rendered
     setTimeout(() => {
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      resultRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }, 100);
   };
 
@@ -123,8 +138,12 @@ const GpaCalculator: React.FC = () => {
           <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
             Calculator
           </span>
-          <h1 className="text-3xl sm:text-4xl font-bold mt-4 mb-2">GPA Calculator</h1>
-          <p className="text-gray-600">Add your courses to calculate your GPA</p>
+          <h1 className="text-3xl sm:text-4xl font-bold mt-4 mb-2">
+            GPA Calculator
+          </h1>
+          <p className="text-gray-600">
+            Add your courses to calculate your GPA
+          </p>
         </div>
 
         <AnimatePresence>
@@ -143,7 +162,7 @@ const GpaCalculator: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
           <button
             onClick={addCourse}
-            className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors w-full sm:w-auto"
+            className="px-6 py-2 bg-[#473939] text-white text-[1.1rem] font-[500] rounded-lg hover:bg-gray-800 transition-colors w-full sm:w-auto"
           >
             Add Course
           </button>
@@ -151,13 +170,13 @@ const GpaCalculator: React.FC = () => {
             <>
               <button
                 onClick={handleCalculateGPA}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
+                className="px-6 py-2 bg-[#6810bb] text-white text-[1.1rem] font-[500] rounded-lg hover:bg-blue-700 transition-colors w-full sm:w-auto"
               >
                 Calculate GPA
               </button>
               <button
                 onClick={clearAll}
-                className="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors w-full sm:w-auto"
+                className="px-6 py-2 bg-red-500 text-white text-[1.1rem] font-[500] rounded-lg hover:bg-red-600 transition-colors w-full sm:w-auto"
               >
                 Clear All
               </button>
@@ -174,7 +193,9 @@ const GpaCalculator: React.FC = () => {
           >
             <div className="text-5xl sm:text-6xl font-bold">{gpa}</div>
             <div className="text-gray-500 mt-2">Cumulative GPA</div>
-            <div className="text-lg sm:text-xl font-semibold mt-4 text-blue-600">{classification}</div>
+            <div className="text-lg sm:text-xl font-semibold mt-4 text-blue-600">
+              {classification}
+            </div>
           </motion.div>
         )}
       </motion.div>
