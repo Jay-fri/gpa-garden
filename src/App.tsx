@@ -4,6 +4,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { initializeAnalytics, logPageView } from "./utils/analytics";
+
+const location = useLocation();
+
+useEffect(() => {
+  initializeAnalytics("G-XXXXXXXXXX"); // Replace with your tracking ID
+  logPageView(location.pathname);
+}, [location]);
 
 const queryClient = new QueryClient();
 
