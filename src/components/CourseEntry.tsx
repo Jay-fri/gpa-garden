@@ -3,6 +3,7 @@ import { Grade } from '../utils/gpaCalculations';
 import { motion } from 'framer-motion';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { Trash2 } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -88,8 +89,9 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
       <button
         onClick={() => onRemove(id)}
         className="p-2 text-red-400 hover:text-red-300 transition-colors w-full sm:w-auto mt-4 sm:mt-0 hover:scale-110 duration-200"
+        aria-label="Remove course"
       >
-        Remove
+        <Trash2 size={20} />
       </button>
     </motion.div>
   );
