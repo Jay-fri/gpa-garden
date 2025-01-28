@@ -45,9 +45,9 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           id={`courseCode-${id}`}
           type="text"
           value={courseCode}
-          onChange={(e) => onCourseCodeChange(id, e.target.value)}
+          onChange={(e) => onCourseCodeChange(id, e.target.value.toUpperCase())}
           placeholder="e.g., CSC101"
-          className="w-full sm:w-32"
+          className="w-full sm:w-32 uppercase"
         />
       </div>
 
