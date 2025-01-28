@@ -136,11 +136,7 @@ const GpaCalculator: React.FC = () => {
       >
         <div className="text-center mb-8">
           <div className="flex gap-[30px] items-center w-full justify-center">
-            <img
-              className="w-[40px] rounded-lg"
-              src="cgpa-master.webp"
-              alt=""
-            />
+            <img className="w-[40px] rounded-lg" src="logo.jpg" alt="" />
 
             <span className="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
               Calculator
