@@ -1,8 +1,8 @@
-import React from 'react';
-import { Grade } from '../utils/gpaCalculations';
-import { motion } from 'framer-motion';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+import React from "react";
+import { Grade } from "../utils/gpaCalculations";
+import { motion } from "framer-motion";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { Trash2 } from "lucide-react";
 import {
   Select,
@@ -41,7 +41,9 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
       className="flex flex-col sm:flex-row gap-4 items-start sm:items-end mb-4 p-6 rounded-xl bg-gradient-to-br from-gray-900/50 to-gray-800/50 backdrop-blur-sm border border-gray-700/50 shadow-lg"
     >
       <div className="flex flex-col gap-2 w-full sm:w-auto">
-        <Label htmlFor={`courseCode-${id}`} className="text-gray-300">Course Code</Label>
+        <Label htmlFor={`courseCode-${id}`} className="text-gray-300">
+          Course Code
+        </Label>
         <Input
           id={`courseCode-${id}`}
           type="text"
@@ -53,13 +55,15 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
       </div>
 
       <div className="flex flex-col gap-2 w-full sm:w-auto">
-        <Label htmlFor={`grade-${id}`} className="text-gray-300">Score (0-100)</Label>
+        <Label htmlFor={`grade-${id}`} className="text-gray-300">
+          Score (0-100)
+        </Label>
         <Input
           id={`grade-${id}`}
           type="number"
           min="0"
           max="100"
-          value={grade || ''}
+          value={grade || ""}
           onChange={(e) => onGradeChange(id, Number(e.target.value))}
           placeholder="Score"
           className="w-full sm:w-32 bg-gray-800/50 border-gray-700 text-gray-200 placeholder:text-gray-500 focus:ring-purple-500"
@@ -67,7 +71,9 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
       </div>
 
       <div className="flex flex-col gap-2 w-full sm:w-auto">
-        <Label htmlFor={`credits-${id}`} className="text-gray-300">Course Units</Label>
+        <Label htmlFor={`credits-${id}`} className="text-gray-300">
+          Course Units
+        </Label>
         <Select
           value={credits.toString()}
           onValueChange={(value) => onCreditsChange(id, Number(value))}
@@ -75,7 +81,7 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           <SelectTrigger className="w-full sm:w-24 bg-gray-800/50 border-gray-700 text-gray-200">
             <SelectValue placeholder="Units" />
           </SelectTrigger>
-          <SelectContent className="bg-gray-800 border-gray-700">
+          <SelectContent className="bg-gray-800 text-white border-gray-700">
             <SelectItem value="1">1</SelectItem>
             <SelectItem value="2">2</SelectItem>
             <SelectItem value="3">3</SelectItem>

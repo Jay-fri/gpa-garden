@@ -1,8 +1,13 @@
-import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import CourseEntry from './CourseEntry';
-import { Course, Grade, calculateGPA, getClassification } from '@/utils/gpaCalculations';
-import { useToast } from '@/components/ui/use-toast';
+import React, { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import CourseEntry from "./CourseEntry";
+import {
+  Course,
+  Grade,
+  calculateGPA,
+  getClassification,
+} from "@/utils/gpaCalculations";
+import { useToast } from "@/components/ui/use-toast";
 
 const GpaCalculator: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -16,14 +21,14 @@ const GpaCalculator: React.FC = () => {
       id: Math.random().toString(36).substr(2, 9),
       grade: 0,
       credits: 3,
-      courseCode: '',
+      courseCode: "",
     };
     setCourses([...courses, newCourse]);
   };
 
   const removeCourse = (id: string) => {
     setShowGPA(false);
-    setCourses(courses.filter(course => course.id !== id));
+    setCourses(courses.filter((course) => course.id !== id));
   };
 
   const updateGrade = (id: string, grade: Grade) => {
@@ -36,9 +41,11 @@ const GpaCalculator: React.FC = () => {
       });
       return;
     }
-    setCourses(courses.map(course => 
-      course.id === id ? { ...course, grade } : course
-    ));
+    setCourses(
+      courses.map((course) =>
+        course.id === id ? { ...course, grade } : course
+      )
+    );
   };
 
   const updateCredits = (id: string, credits: number) => {
@@ -51,16 +58,20 @@ const GpaCalculator: React.FC = () => {
       });
       return;
     }
-    setCourses(courses.map(course => 
-      course.id === id ? { ...course, credits } : course
-    ));
+    setCourses(
+      courses.map((course) =>
+        course.id === id ? { ...course, credits } : course
+      )
+    );
   };
 
   const updateCourseCode = (id: string, courseCode: string) => {
     setShowGPA(false);
-    setCourses(courses.map(course => 
-      course.id === id ? { ...course, courseCode } : course
-    ));
+    setCourses(
+      courses.map((course) =>
+        course.id === id ? { ...course, courseCode } : course
+      )
+    );
   };
 
   const clearAll = () => {
@@ -81,11 +92,12 @@ const GpaCalculator: React.FC = () => {
       });
       return;
     }
-    
-    const hasEmptyCourses = courses.some(course => 
-      course.courseCode.trim() === '' || 
-      course.grade === 0 || 
-      course.credits === 0
+
+    const hasEmptyCourses = courses.some(
+      (course) =>
+        course.courseCode.trim() === "" ||
+        course.grade === 0 ||
+        course.credits === 0
     );
 
     if (hasEmptyCourses) {
@@ -105,7 +117,10 @@ const GpaCalculator: React.FC = () => {
 
     // Scroll to result after a short delay to ensure the element is rendered
     setTimeout(() => {
-      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      resultRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }, 100);
   };
 
@@ -120,7 +135,7 @@ const GpaCalculator: React.FC = () => {
         className="relative bg-gradient-to-br from-[#1A1F2C] to-[#2D3748] rounded-2xl shadow-2xl p-6 sm:p-8 overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 pointer-events-none" />
-        
+
         <div className="relative text-center mb-10">
           <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-purple-500 to-blue-500 text-white text-sm font-medium rounded-full mb-4">
             Calculator
@@ -128,7 +143,9 @@ const GpaCalculator: React.FC = () => {
           <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
             GPA Calculator
           </h1>
-          <p className="text-gray-300">Add your courses to calculate your GPA</p>
+          <p className="text-gray-300">
+            Add your courses to calculate your GPA
+          </p>
         </div>
 
         <AnimatePresence>
@@ -147,7 +164,7 @@ const GpaCalculator: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <button
             onClick={addCourse}
-            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto"
+            className="px-6 py-3 bg-[#38B2AC] text-[#F0F0F0] text-[1.1rem] font-[500] rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto"
           >
             Add Course
           </button>
@@ -155,13 +172,13 @@ const GpaCalculator: React.FC = () => {
             <>
               <button
                 onClick={handleCalculateGPA}
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25 w-full sm:w-auto"
+                className="px-6 py-3 bg-[#4A90E2] text-[#F0F0F0] text-[1.1rem] font-[500] rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25 w-full sm:w-auto"
               >
                 Calculate GPA
               </button>
               <button
                 onClick={clearAll}
-                className="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/25 w-full sm:w-auto"
+                className="px-6 py-3 bg-red-600 text-[#f0f0f0] text-[1.1rem] font-[500] rounded-xl hover:from-white hover:to-white transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-white/25 w-full sm:w-auto"
               >
                 Clear All
               </button>
