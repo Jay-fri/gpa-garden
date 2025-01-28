@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CourseEntry from './CourseEntry';
 import { Course, Grade, calculateGPA, getClassification } from '@/utils/gpaCalculations';
@@ -8,9 +8,10 @@ const GpaCalculator: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [showGPA, setShowGPA] = useState(false);
   const { toast } = useToast();
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const addCourse = () => {
-    setShowGPA(false); // Hide GPA when adding new course
+    setShowGPA(false);
     const newCourse: Course = {
       id: Math.random().toString(36).substr(2, 9),
       grade: 0,
@@ -21,12 +22,12 @@ const GpaCalculator: React.FC = () => {
   };
 
   const removeCourse = (id: string) => {
-    setShowGPA(false); // Hide GPA when removing course
+    setShowGPA(false);
     setCourses(courses.filter(course => course.id !== id));
   };
 
   const updateGrade = (id: string, grade: Grade) => {
-    setShowGPA(false); // Hide GPA when updating grade
+    setShowGPA(false);
     if (grade < 0 || grade > 100) {
       toast({
         title: "Invalid Score",
@@ -41,7 +42,7 @@ const GpaCalculator: React.FC = () => {
   };
 
   const updateCredits = (id: string, credits: number) => {
-    setShowGPA(false); // Hide GPA when updating credits
+    setShowGPA(false);
     if (credits < 1 || credits > 6) {
       toast({
         title: "Invalid Units",
@@ -56,7 +57,7 @@ const GpaCalculator: React.FC = () => {
   };
 
   const updateCourseCode = (id: string, courseCode: string) => {
-    setShowGPA(false); // Hide GPA when updating course code
+    setShowGPA(false);
     setCourses(courses.map(course => 
       course.id === id ? { ...course, courseCode } : course
     ));
@@ -81,7 +82,6 @@ const GpaCalculator: React.FC = () => {
       return;
     }
     
-    // Check if all required fields are filled
     const hasEmptyCourses = courses.some(course => 
       course.courseCode.trim() === '' || 
       course.grade === 0 || 
@@ -102,6 +102,11 @@ const GpaCalculator: React.FC = () => {
       title: "GPA Calculated",
       description: "Your GPA has been calculated based on your course inputs",
     });
+
+    // Scroll to result after a short delay to ensure the element is rendered
+    setTimeout(() => {
+      resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
   };
 
   const gpa = calculateGPA(courses);
@@ -162,6 +167,7 @@ const GpaCalculator: React.FC = () => {
 
         {showGPA && courses.length > 0 && (
           <motion.div
+            ref={resultRef}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="mt-8 text-center"
