@@ -3,6 +3,13 @@ import { Grade } from '../utils/gpaCalculations';
 import { motion } from 'framer-motion';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 interface CourseEntryProps {
   id: string;
@@ -51,7 +58,7 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
           type="number"
           min="0"
           max="100"
-          value={grade}
+          value={grade || ''}
           onChange={(e) => onGradeChange(id, Number(e.target.value))}
           placeholder="Score"
           className="w-full sm:w-32"
@@ -60,16 +67,22 @@ const CourseEntry: React.FC<CourseEntryProps> = ({
 
       <div className="flex flex-col gap-2 w-full sm:w-auto">
         <Label htmlFor={`credits-${id}`}>Course Units</Label>
-        <Input
-          id={`credits-${id}`}
-          type="number"
-          min="1"
-          max="6"
-          value={credits}
-          onChange={(e) => onCreditsChange(id, Number(e.target.value))}
-          placeholder="Units"
-          className="w-full sm:w-24"
-        />
+        <Select
+          value={credits.toString()}
+          onValueChange={(value) => onCreditsChange(id, Number(value))}
+        >
+          <SelectTrigger className="w-full sm:w-24">
+            <SelectValue placeholder="Units" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="1">1</SelectItem>
+            <SelectItem value="2">2</SelectItem>
+            <SelectItem value="3">3</SelectItem>
+            <SelectItem value="4">4</SelectItem>
+            <SelectItem value="5">5</SelectItem>
+            <SelectItem value="6">6</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <button
