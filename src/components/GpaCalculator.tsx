@@ -203,6 +203,39 @@ const GpaCalculator: React.FC = () => {
         </motion.div>
       </div>
       <BuyMeCoffeeOverlay />
+
+      <footer className=" flex flex-col gap-[30px] w-fit justify-center items-center mx-auto text-[0.9rem] font-[600] text-[#626060]">
+        <div className="flex flex-col gap-[10px]">
+          <div className="text-[1.2rem] font-[700] text-center">
+            Contact Developer
+          </div>{" "}
+          <ul>
+            <li className="">
+              <span className="font-[700] text-[1rem]">Whatsapp/Phone: </span>
+              +2347051693937, +2349133054018{" "}
+            </li>
+            <li className="">
+              <span className="font-[700] text-[1rem]">Twitter/X: </span>
+              @joshwebdev1
+            </li>
+            <li className="">
+              <span className="font-[700] text-[1rem]">GitHub: </span>
+              <a
+                className="underline"
+                target="_blank"
+                href="https://github.com/Jay-fri"
+              >
+                Jayfri
+              </a>
+            </li>
+            <li className="">
+              <span className="font-[700] text-[1rem]">TikTok: </span>
+              @joshwebdev1
+            </li>
+          </ul>
+        </div>
+        <div>©2025 Created by Joshua || Web Dev </div>
+      </footer>
     </div>
   );
 };

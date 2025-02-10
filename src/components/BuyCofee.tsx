@@ -39,16 +39,16 @@ const BuyMeCoffeeOverlay = () => {
               </p>
 
               <div className="grid grid-cols-3 gap-4 mb-6">
-                {[3, 5, 10].map((price) => (
+                {[1, 3, 5].map((price) => (
                   <button
                     key={price}
                     className="bg-yellow-50 hover:bg-yellow-100 py-3 rounded-lg border-2 border-yellow-400"
                   >
                     <div className="font-bold text-xl">${price}</div>
                     <div className="text-sm text-gray-600">
-                      {price === 3
+                      {price === 4
                         ? "1 coffee"
-                        : `${Math.floor(price / 3)} coffees`}
+                        : `${Math.floor(price / 1)} coffees`}
                     </div>
                   </button>
                 ))}
